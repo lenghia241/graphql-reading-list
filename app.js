@@ -1,8 +1,9 @@
 const express = require("express");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const path = require("path");
+// const mongoose = require("mongoose");
+// const bodyParser = require("body-parser");
+// const cors = require("cors");
+// const path = require("path");
+const schema = require("./schema/schema");
 
 const graphqlHTTP = require("express-graphql");
 
@@ -15,7 +16,12 @@ const app = express();
 // app.use(cors());
 // app.use(express.static(path.join(__dirname, "../")));
 
-app.use("/graphql", graphqlHTTP({}));
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    schema
+  })
+);
 
 // DB config
 // const db = require("./config/keys").mongoURI;
