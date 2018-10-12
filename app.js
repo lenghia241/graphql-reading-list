@@ -1,5 +1,5 @@
 const express = require("express");
-// const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 // const bodyParser = require("body-parser");
 // const cors = require("cors");
 // const path = require("path");
@@ -19,26 +19,27 @@ const app = express();
 app.use(
   "/graphql",
   graphqlHTTP({
-    schema
+    schema,
+    graphiql: true
   })
 );
 
 // DB config
-// const db = require("./config/keys").mongoURI;
+const db = require("./config/keys").mongoURI;
 
 //Connect to MongoDB
-// mongoose
-//   .connect(
-//     db,
-//     { useNewUrlParser: true }
-//   )
-//   .then(() => console.log("MongoDB connected"))
-//   .catch(err => console.log(err));
+mongoose
+  .connect(
+    db,
+    { useNewUrlParser: true }
+  )
+  .then(() => console.log("MongoDB connected"))
+  .catch(err => console.log(err));
 
 // Use Routes
 // app.use();
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 7000;
 
 app.listen(port, () => {
   console.log(`Now listening for request on port ${port}"`);
